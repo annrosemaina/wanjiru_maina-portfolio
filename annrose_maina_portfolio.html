@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annrose Wanjiru Maina — Data Analyst &amp; ML Enthusiast</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,72,400;0,72,500;0,72,600;1,72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#161d24;
+    --ink-2:#1e2830;
+    --paper:#eae6da;
+    --paper-dim:#ded9c9;
+    --gold:#9c8355;
+    --gold-soft:#b39c6e;
+    --stamp-red:#8a4a42;
+    --ledger-green:#546b58;
+    --slate:#8b93a3;
+    --line: rgba(234,230,218,0.12);
+    --line-dark: rgba(22,29,36,0.14);
+
+    --display: 'Newsreader', serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  ::selection{background:var(--gold); color:var(--ink);}
+
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(16,28,43,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .nav-mark{
+    font-family:var(--mono); font-size:13px; letter-spacing:.08em;
+    color:var(--gold-soft); text-decoration:none;
+  }
+  .nav-links{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  .nav-links a{
+    font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    text-decoration:none; color:var(--paper); opacity:.72;
+    padding:4px 2px; border-bottom:1px solid transparent;
+    transition:opacity .2s, border-color .2s;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{opacity:1; border-color:var(--gold);}
+  .nav-links{display:none;}
+  @media (min-width:720px){ .nav-links{display:flex;} }
+
+  /* ---------- hero: ledger slip ---------- */
+  header.hero{
+    padding:96px 0 64px;
+    position:relative;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 100% 34px, 34px 100%;
+    background-position: 0 0;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(16,28,43,0) 0%, rgba(16,28,43,0.55) 70%, var(--ink) 100%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative; z-index:2;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--gold-soft); display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:none;}
+
+  h1.name{
+    font-family:var(--display); font-weight:500; font-size:clamp(40px, 7vw, 72px);
+    line-height:1.03; margin:0 0 18px; color:var(--paper); letter-spacing:-.01em;
+  }
+  h1.name em{font-style:italic; color:var(--gold-soft); font-weight:400;}
+
+  .role-line{
+    font-family:var(--mono); font-size:14px; color:var(--paper); opacity:.82;
+    margin:0 0 34px; letter-spacing:.02em;
+  }
+  .role-line .sep{color:var(--gold); margin:0 8px;}
+
+  .hero-summary{
+    max-width:620px; font-size:17px; color:var(--paper); opacity:.86; margin:0 0 40px;
+  }
+
+  .stamp-row{display:flex; flex-wrap:wrap; gap:14px; align-items:center;}
+  .stamp{
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    border:1.5px solid var(--gold); color:var(--gold-soft);
+    padding:8px 14px; border-radius:2px; transform:rotate(-2deg);
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .stamp.alt{border-color:var(--ledger-green); color:#8ec19c; transform:rotate(1.5deg);}
+  .btn-line{
+    font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    text-decoration:none; color:var(--ink); background:var(--gold);
+    padding:11px 20px; border-radius:2px; transition:background .2s, transform .2s;
+  }
+  .btn-line:hover, .btn-line:focus-visible{background:var(--gold-soft); transform:translateY(-1px);}
+
+  /* ---------- section shell ---------- */
+  section{padding:88px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:44px;}
+  .section-num{font-family:var(--mono); font-size:13px; color:var(--gold); letter-spacing:.05em;}
+  h2.section-title{
+    font-family:var(--display); font-weight:500; font-size:clamp(26px,4vw,36px);
+    margin:0; color:var(--paper);
+  }
+  .section-rule{flex:1; height:1px; background:var(--line);}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr; gap:40px;}
+  @media(min-width:800px){ .about-grid{grid-template-columns:1.4fr 1fr;} }
+  .about-text p{font-size:16px; color:var(--paper); opacity:.88; margin:0 0 18px;}
+  .ledger-card{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:4px; padding:26px 24px;
+  }
+  .ledger-card h3{
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gold-soft); margin:0 0 16px;
+  }
+  .ledger-list{list-style:none; margin:0; padding:0;}
+  .ledger-list li{
+    display:flex; justify-content:space-between; gap:12px;
+    font-size:14px; padding:9px 0; border-bottom:1px dashed var(--line);
+  }
+  .ledger-list li:last-child{border-bottom:none;}
+  .ledger-list .k{color:var(--paper); opacity:.65;}
+  .ledger-list .v{font-family:var(--mono); color:var(--paper); text-align:right;}
+
+  /* ---------- skills ---------- */
+  .skill-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:16px;}
+  .skill-card{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:4px; padding:20px;
+    transition:border-color .2s, transform .2s;
+  }
+  .skill-card:hover{border-color:var(--gold); transform:translateY(-2px);}
+  .skill-card .tag{
+    font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-soft);
+    display:block; margin-bottom:10px;
+  }
+  .skill-card ul{margin:0; padding:0; list-style:none;}
+  .skill-card li{font-size:14px; padding:4px 0; opacity:.85;}
+  .skill-card li::before{content:"— "; color:var(--gold); opacity:.8;}
+
+  /* ---------- experience timeline ---------- */
+  .timeline{position:relative; padding-left:28px; border-left:1px solid var(--line);}
+  .tl-item{position:relative; padding-bottom:44px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-33px; top:4px; width:9px; height:9px; border-radius:50%;
+    background:var(--gold); box-shadow:0 0 0 4px var(--ink);
+  }
+  .tl-role{font-family:var(--display); font-size:20px; font-weight:500; margin:0 0 4px; color:var(--paper);}
+  .tl-meta{font-family:var(--mono); font-size:12px; color:var(--gold-soft); margin-bottom:12px;}
+  .tl-meta .org{color:var(--paper); opacity:.7;}
+  .tl-desc{font-size:14.5px; opacity:.82; margin:0;}
+  .tl-toggle{
+    font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--gold-soft); background:none; border:1px solid var(--line); border-radius:2px;
+    padding:7px 12px; margin-top:14px; cursor:pointer;
+  }
+  .tl-toggle:hover, .tl-toggle:focus-visible{border-color:var(--gold);}
+  .tl-full{display:none; margin-top:14px; padding-left:0; font-size:14px; opacity:.82;}
+  .tl-full.open{display:block;}
+  .tl-full li{margin-bottom:7px;}
+
+  /* ---------- project case file ---------- */
+  .case-file{
+    background:var(--paper); color:var(--ink); border-radius:6px; overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .case-head{
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px;
+    padding:30px 32px; border-bottom:1px dashed var(--line-dark);
+  }
+  .case-head .case-eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--stamp-red);}
+  .case-title{font-family:var(--display); font-size:clamp(22px,3vw,30px); font-weight:600; margin:6px 0 0; max-width:520px;}
+  .case-stamp{
+    font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    border:2px solid var(--ledger-green); color:var(--ledger-green);
+    padding:8px 14px; height:fit-content; transform:rotate(-3deg); border-radius:2px;
+  }
+  .case-body{padding:32px;}
+  .case-body p{font-size:15px; color:#2a3242; opacity:.92; margin:0 0 16px;}
+  .case-body h4{
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--stamp-red); margin:26px 0 12px;
+  }
+  .case-body ul{margin:0; padding-left:18px;}
+  .case-body li{font-size:14.5px; margin-bottom:8px; color:#2a3242;}
+
+  .metric-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(130px,1fr)); gap:1px; background:var(--line-dark); margin:22px 0; border:1px solid var(--line-dark); border-radius:4px; overflow:hidden;}
+  .metric{background:var(--paper); padding:18px 16px;}
+  .metric .num{font-family:var(--mono); font-size:26px; font-weight:600; color:var(--stamp-red);}
+  .metric .lbl{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:#5b6472; margin-top:4px;}
+
+  .model-table{width:100%; border-collapse:collapse; margin:14px 0 8px; font-size:13px;}
+  .model-table th, .model-table td{
+    text-align:left; padding:10px 12px; border-bottom:1px solid var(--line-dark); font-family:var(--mono);
+  }
+  .model-table th{font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:#5b6472;}
+  .model-table td.hi{color:var(--stamp-red); font-weight:600;}
+  .model-table tr:last-child td{border-bottom:none; background:#e9e3d3;}
+
+  .case-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:22px;}
+  .case-tags span{
+    font-family:var(--mono); font-size:11px; letter-spacing:.03em; color:#5b6472;
+    border:1px solid var(--line-dark); border-radius:2px; padding:5px 10px;
+  }
+
+  /* ---------- education ---------- */
+  .edu-grid{display:grid; grid-template-columns:1fr; gap:14px;}
+  @media(min-width:720px){ .edu-grid{grid-template-columns:1fr 1fr;} }
+  .edu-card{border:1px solid var(--line); border-radius:4px; padding:22px; background:var(--ink-2);}
+  .edu-card .school{font-family:var(--display); font-size:18px; margin:0 0 4px;}
+  .edu-card .deg{font-size:13.5px; opacity:.78; margin:0 0 6px;}
+  .edu-card .dates{font-family:var(--mono); font-size:11px; color:var(--gold-soft);}
+
+  /* ---------- contact / footer ---------- */
+  footer{padding:90px 0 60px; text-align:center;}
+  footer .close-mark{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); margin-bottom:20px;}
+  footer h2{font-family:var(--display); font-size:clamp(30px,5vw,46px); margin:0 0 22px; font-weight:500;}
+  .contact-links{display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-bottom:40px;}
+  .contact-links a{
+    font-family:var(--mono); font-size:13px; text-decoration:none; color:var(--paper);
+    border:1px solid var(--line); padding:12px 20px; border-radius:2px; transition:border-color .2s, color .2s;
+  }
+  .contact-links a:hover, .contact-links a:focus-visible{border-color:var(--gold); color:var(--gold-soft);}
+  footer .fine{font-family:var(--mono); font-size:11px; opacity:.4;}
+
+  :focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="nav-mark" href="#top">A.W. MAINA</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#project">Project</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-inner">
+    <div class="eyebrow reveal in">Data Science · Artificial Intelligence · Machine Learning</div>
+    <h1 class="name reveal in">Annrose Wanjiru<br><em>Maina</em></h1>
+    <p class="role-line reveal in">Data Scientist <span class="sep">/</span> AI &amp; ML Enthusiast <span class="sep">/</span> Predictive Modelling <span class="sep">/</span> Nairobi, Kenya</p>
+    <p class="hero-summary reveal in">I build machine learning models that turn messy, high-stakes data into decisions — most recently a fraud-detection model that catches 100% of fraudulent loan applications in testing. Four years inside banking risk and credit data taught me exactly which problems are worth modelling.</p>
+    <div class="stamp-row reveal in">
+      <span class="stamp">AUC ROC 0.916</span>
+      <span class="stamp alt">Recall 1.00 · Fraud Class</span>
+      <a class="btn-line" href="#project">Review the case file →</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a data scientist in the making, drawn to machine learning and AI as tools for solving problems that used to rely on human judgement alone — starting with the ones I saw up close in banking: fraud, credit risk, and default. I recently completed my MSc in Computing and Information Systems at Strathmore University, where I worked hands-on with Python, machine learning, predictive modelling, data visualisation, and SQL.</p>
+        <p>My first four years of work were in banking — credit administration, risk management, regulatory compliance — not as a data scientist, but close enough to the data to see exactly where the hard problems were. That's what pulled me toward ML and AI: the chance to build models that catch what manual review misses. I've also trained in Digital Forensics and Cybersecurity at Brno University of Technology, which sharpened how I think about data integrity and security in the systems I build.</p>
+        <p>What I care about now is building models that hold up under real conditions — high-recall fraud detection, credit risk scoring, and predictive systems that give institutions a faster, more reliable read on the data in front of them.</p>
+      </div>
+      <div class="ledger-card reveal">
+        <h3>Quick Reference</h3>
+        <ul class="ledger-list">
+          <li><span class="k">Based in</span><span class="v">Nairobi, Kenya</span></li>
+          <li><span class="k">Focus</span><span class="v">ML · AI · Fraud detection</span></li>
+          <li><span class="k">Core tools</span><span class="v">Python, SQL, XGBoost</span></li>
+          <li><span class="k">Experience</span><span class="v">4+ years, banking</span></li>
+          <li><span class="k">Latest</span><span class="v">MSc CIS, Strathmore ✓</span></li>
+          <li><span class="k">Certs</span><span class="v">CPA I &amp; II</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Skills &amp; Certifications</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card reveal">
+        <span class="tag">Technical</span>
+        <ul>
+          <li>Python (pandas, scikit-learn, XGBoost)</li>
+          <li>SQL &amp; data reporting</li>
+          <li>Machine learning &amp; predictive analytics</li>
+          <li>Data visualisation</li>
+          <li>Artificial intelligence fundamentals</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal">
+        <span class="tag">Applied Background</span>
+        <ul>
+          <li>Credit administration &amp; risk management</li>
+          <li>Regulatory compliance</li>
+          <li>Credit Reference Bureau reporting</li>
+          <li>Loan portfolio monitoring</li>
+          <li>Fraud detection &amp; screening</li>
+        </ul>
+      </div>
+      <div class="skill-card reveal">
+        <span class="tag">Certifications</span>
+        <ul>
+          <li>CPA Part I</li>
+          <li>CPA II (Section 3 &amp; 4)</li>
+          <li>Data Submission Master Class</li>
+          <li>Cyber Security &amp; Digital Forensics — Brno UT</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <p class="tl-role">Credit Administration Officer</p>
+        <p class="tl-meta"><span class="org">Faulu Microfinance Bank</span> · Jun 2023 – Jun 2024 · Kenya</p>
+        <p class="tl-desc">Managed accurate, timely reporting of customer credit data to Credit Reference Bureaus and reconciled internal records against CRB data to catch discrepancies before they became compliance problems.</p>
+        <button class="tl-toggle" aria-expanded="false">Show full scope</button>
+        <ul class="tl-full">
+          <li>Ensured compliance with local credit-reporting regulations and kept the bank's practices aligned with evolving legal requirements.</li>
+          <li>Reconciled by-products against payments received and flagged droppage cases; prepared loan payment uploads and applied non-checkoff payments correctly.</li>
+          <li>Closed cleared loans, reconciled group control accounts, and facilitated GCIF account closures once insurance payments were received.</li>
+          <li>Monitored portfolio at risk for check-off loans and restructured booked non-performing facilities.</li>
+          <li>Collaborated across credit analysis, risk management, IT, and customer service to keep credit data accurate and securely transmitted to CRBs.</li>
+          <li>Maintained audit standards with no repeat exceptions.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <p class="tl-role">Credit Risk Officer</p>
+        <p class="tl-meta"><span class="org">Faulu Microfinance Bank</span> · Mar 2022 – Jun 2024 · Nairobi, Kenya</p>
+        <p class="tl-desc">Verified consumer loan applications against employer data, kept payment reconciliation current, and shaped policy recommendations to protect loan book quality.</p>
+        <button class="tl-toggle" aria-expanded="false">Show full scope</button>
+        <ul class="tl-full">
+          <li>Verified all consumer loan applications with employers to confirm authenticity and repayment ability.</li>
+          <li>Collected payment schedules from employers ahead of time to keep loan recovery on track across the portfolio.</li>
+          <li>Reconciled payments received against expected instalments for all consumer loans.</li>
+          <li>Reviewed existing consumer relationships and made recommendations to management to support quality lending.</li>
+          <li>Followed up with branches on MOU sanction conditions and other covenants prior to disbursement.</li>
+          <li>Recommended policy reviews for customer service and risk management based on experience and industry trends.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <p class="tl-role">Accounts Payable Assistant</p>
+        <p class="tl-meta"><span class="org">United Aryan (EPZ)</span> · May 2021 – Sep 2021 · Nairobi, Kenya</p>
+        <p class="tl-desc">Handled supplier reconciliation, bank and cheque payment postings in Tally, and document filing under strict sensitivity classification.</p>
+        <button class="tl-toggle" aria-expanded="false">Show full scope</button>
+        <ul class="tl-full">
+          <li>Posted bank payments and cheque payments for all banks in Tally.</li>
+          <li>Prepared, entered, and distributed cheques; followed up on missing invoices with concerned departments.</li>
+          <li>Filed journal vouchers and classified documents by sensitivity; kept cheque filing in sequence by cheque number.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <p class="tl-role">Volunteer Attachee</p>
+        <p class="tl-meta"><span class="org">J.N. Thindi and Company</span> · Jan 2019 – May 2019 · Nairobi, Kenya</p>
+        <p class="tl-desc">Assisted with day-to-day operations of the firm during an early attachment placement.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Featured Project</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="case-file reveal">
+      <div class="case-head">
+        <div>
+          <span class="case-eyebrow">Conference Paper · Strathmore University</span>
+          <h3 class="case-title">A Model for Predicting Fraudulent Loan Applications Using Machine Learning</h3>
+        </div>
+        <span class="case-stamp">Best model: XGBoost</span>
+      </div>
+
+      <div class="case-body">
+        <p>Supervised by Bernard Shibwabo. Financial institutions lose ground to loan fraud during the verification stage, where forged documents and fabricated identities are hardest to catch — and traditional, manual review can't keep pace. This study builds and compares three supervised models to catch fraudulent applications earlier and more reliably.</p>
+
+        <div class="metric-grid">
+          <div class="metric"><div class="num">83.44%</div><div class="lbl">Accuracy</div></div>
+          <div class="metric"><div class="num">0.89</div><div class="lbl">Weighted F1</div></div>
+          <div class="metric"><div class="num">0.916</div><div class="lbl">AUC ROC</div></div>
+          <div class="metric"><div class="num">1.00</div><div class="lbl">Recall, fraud class</div></div>
+        </div>
+
+        <h4>Approach</h4>
+        <ul>
+          <li>Sourced a 50,001-record structured loan application dataset (Kaggle) with income, employment, credit score, loan amount, repayment history, and fraud labels.</li>
+          <li>Built a pre-processing pipeline: missing-value checks, label encoding for categorical fields, and feature scaling with StandardScaler.</li>
+          <li>Corrected severe class imbalance with SMOTE, balancing fraud and legitimate classes at 39,161 records each before an 80/20 stratified train-test split.</li>
+          <li>Trained and compared Logistic Regression (interpretable baseline), Random Forest, and XGBoost (n_estimators=100, learning rate 0.1, max depth 6), tuned via GridSearchCV.</li>
+        </ul>
+
+        <h4>Model comparison</h4>
+        <table class="model-table">
+          <thead>
+            <tr><th>Model</th><th>Accuracy</th><th>F1 (wtd)</th><th>AUC ROC</th><th>Recall (fraud)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Logistic Regression</td><td>Baseline</td><td>—</td><td>—</td><td>Lower</td></tr>
+            <tr><td>Random Forest</td><td>0.8344</td><td>0.89</td><td>0.9156</td><td>High</td></tr>
+            <tr><td class="hi">XGBoost (proposed)</td><td class="hi">0.8344</td><td class="hi">0.89</td><td class="hi">0.9160</td><td class="hi">1.00</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Why it matters</h4>
+        <p>XGBoost flagged nearly every fraudulent application in the test set — a deliberate trade-off, since missing a fraud case is far costlier to a lender than sending a legitimate one for manual review. The findings support folding gradient-boosted ensembles into automated loan screening as a scalable complement to human review, with future work extending to institution-specific data and document-level fraud signals.</p>
+
+        <div class="case-tags">
+          <span>Python</span><span>scikit-learn</span><span>XGBoost</span><span>Random Forest</span>
+          <span>SMOTE</span><span>Logistic Regression</span><span>Feature Engineering</span>
+        </div>
+
+        <p style="margin-top:20px;">
+          <a href="https://github.com/annrosemaina/loan-fraud-prediction-machine-learning" target="_blank" rel="noopener" style="font-family:var(--mono); font-size:13px; color:var(--stamp-red); text-decoration:none; border-bottom:1px solid var(--stamp-red); padding-bottom:2px;">View the code on GitHub ↗</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Education</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <p class="school">Strathmore University</p>
+        <p class="deg">MSc, Computing and Information Systems</p>
+        <p class="dates">Apr 2024 – Apr 2026 · Completed</p>
+      </div>
+      <div class="edu-card reveal">
+        <p class="school">Brno University of Technology</p>
+        <p class="deg">Cyber Security and Digital Forensics</p>
+        <p class="dates">Jun 2025 – Jul 2025</p>
+      </div>
+      <div class="edu-card reveal">
+        <p class="school">KCA University</p>
+        <p class="deg">Bachelor of Commerce, Finance</p>
+        <p class="dates">May 2017 – Dec 2021</p>
+      </div>
+      <div class="edu-card reveal">
+        <p class="school">KCA University</p>
+        <p class="deg">CPA</p>
+        <p class="dates">May 2017 – Aug 2021</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="close-mark reveal">File closed — let's talk</div>
+    <h2 class="reveal">Open to data science, AI<br>&amp; ML roles — especially in fintech.</h2>
+    <div class="contact-links reveal">
+      <a href="mailto:annrosecirumaina20@gmail.com">annrosecirumaina20@gmail.com</a>
+      <a href="https://www.linkedin.com/in/wanjiru-maina" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/annrosemaina" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <p class="fine">Annrose Wanjiru Maina · Nairobi, Kenya · 2026</p>
+  </div>
+</footer>
+
+<script>
+  // scroll reveal
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  items.forEach(el => io.observe(el));
+
+  // experience expand/collapse
+  document.querySelectorAll('.tl-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const full = btn.nextElementSibling;
+      const open = full.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.textContent = open ? 'Hide full scope' : 'Show full scope';
+    });
+  });
+</script>
+
+</body>
+</html>
